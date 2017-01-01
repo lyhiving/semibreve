@@ -41,14 +41,14 @@ class Manager
      */
     private function saveMinimConfiguration($userConfig)
     {
-        $id = md5($userConfig->getAdminEmail()); // Hash username.
+        $id = md5($userConfig->getUsername()); // Hash username.
         $sessionFilename = $this->config->getSessionFolderName() . '/' . $id . '.dat'; // Create session file path.
 
         // Save Minim configuration.
-        $userConfigFilename = $this->getMinimConfigurationFilename($userConfig->getAdminEmail());
+        $userConfigFilename = $this->getMinimConfigurationFilename($userConfig->getUsername());
         $minimConfig = array(
-            'admin_email' => $userConfig->getAdminEmail(),
-            'admin_password_hash' => $userConfig->getAdminPasswordHash(),
+            'admin_email' => $userConfig->getUsername(),
+            'admin_password_hash' => $userConfig->getPasswordHash(),
             'secret_key' => $this->config->getSecretKey(),
             'token_length' => $this->config->getTokenLength(),
             'token_ttl' => $this->config->getTokenTtl(),

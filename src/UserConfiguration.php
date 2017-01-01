@@ -27,13 +27,13 @@ class UserConfiguration
 
 
     /**
-     * Gets the admin email address required for login.
+     * Gets the username required for login.
      *
      * @return string
      */
-    public function getAdminEmail()
+    public function getUsername()
     {
-        return $this->config['admin_email'];
+        return $this->config['username'];
     }
 
     /**
@@ -41,9 +41,9 @@ class UserConfiguration
      *
      * @return string
      */
-    public function getAdminPasswordHash()
+    public function getPasswordHash()
     {
-        return $this->config['admin_password_hash'];
+        return $this->config['password_hash'];
     }
 
     /**
