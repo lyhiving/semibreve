@@ -1,0 +1,24 @@
+{
+    "name": "semibreve/semibreve",
+    "type": "library",
+    "description": "Very simple multi-user authentication.",
+    "keywords": ["multi","user","auth","authentication"],
+    "homepage": "https://github.com/semibreve/semibreve",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Saul Johnson",
+            "email": "saul.a.johnson@gmail.com",
+            "homepage": "https://sauljohnson.com/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "semibreve/minim": "^1.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Semibreve\\": "src/"
+        }
+    }
+}
