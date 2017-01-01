@@ -110,33 +110,6 @@ class Manager
     }
 
     /**
-     * Authenticates the user.
-     *
-     * @param string $username          the username credential
-     * @param string $password          the password credential
-     * @return null|UserConfiguration   the user configuration if authentication was successful, otherwise null
-     */
-    public function authenticate($username, $password) {
-        // Invalid username.
-        if (!$this->userConfigurationExists($username)) {
-            return null;
-        }
-
-        // Get user configuration.
-        $user = $this->getUserConfiguration($username);
-
-        // Save Minim-compatible configuration.
-        $path = $this->saveMinimConfiguration($user);
-
-        // Use Minim to authenticate user.
-        $minim = new Authenticator(new Configuration($path));
-        $authenticated = $minim->authenticate($username, $password);
-
-        // If authentication was successful, pass back user.
-        return $authenticated ? $user : null;
-    }
-
-    /**
      * Gets the current authentication context.
      *
      * @return null|AuthenticationContext   the current authentication context if logged in, otherwise null
@@ -167,13 +140,45 @@ class Manager
     }
 
     /**
+     * Authenticates the user.
+     *
+     * @param string $username          the username credential
+     * @param string $password          the password credential
+     * @return null|UserConfiguration   the user configuration if authentication was successful, otherwise null
+     */
+    public function authenticate($username, $password) {
+        // Invalid username.
+        if (!$this->userConfigurationExists($username)) {
+            return null;
+        }
+
+        // Get user configuration.
+        $user = $this->getUserConfiguration($username);
+
+        // Save Minim-compatible configuration.
+        $path = $this->saveMinimConfiguration($user);
+
+        // Use Minim to authenticate user.
+        $minim = new Authenticator(new Configuration($path));
+        $authenticated = $minim->authenticate($username, $password);
+
+        // If authentication was successful, pass back user.
+        return $authenticated ? $user : null;
+    }
+
+    /**
      * Gets the configuration for the currently logged in user.
      *
-     * @return UserConfiguration    the configuration for the currently logged in user, otherwise null
+     * @return null|UserConfiguration   the configuration for the currently logged in user, otherwise null
      */
     public function getAuthenticatedUser()
     {
-        return $this->getCurrentAuthenticationContext()->getUser();
+        // No authentication context means no user.
+        $context = $this->getCurrentAuthenticationContext();
+        if ($context === null) {
+            return null;
+        }
+        return $context->getUser();
     }
 
     /**
@@ -181,6 +186,10 @@ class Manager
      */
     public function logout()
     {
-        $this->getCurrentAuthenticationContext()->getAuthenticator()->logout();
+        // No authentication context means we're logged out anyway.
+        $context = $this->getCurrentAuthenticationContext();
+        if ($context !== null) {
+            $context->getAuthenticator()->logout();
+        }
     }
 }
