@@ -8,6 +8,9 @@ Every so often, you build a website that needs:
 
 Semibreve is designed for this purpose; to be a secure, multi-user authentication system that doesn't do anything silly like leak the users password (or store it in plain text) or operate over insecure (non-HTTPS) connections unless you want it to.
 
+## Inner Workings
+Semibreve doesn't handle the mechanics of logging a user in itself. Under the hood, it uses several instances of [Minim](https://github.com/semibreve/minim/) to work with multiple users. For many intents and purposes, it can therefore be considered to be as secure as Minim.
+
 ## Installation
 Install Semibreve via Composer like this:
 
@@ -86,7 +89,7 @@ Or redirect away from a page based on whether they're logged in or not:
 
 ```php
 // Check if user is authenticated.
-if (!$semibreve->getAuthenticatedUser() === null) {
+if ($semibreve->getAuthenticatedUser() !== null) {
     header('Location: /forbidden.php'); // Not logged in, go to jail.
     die();
 }
