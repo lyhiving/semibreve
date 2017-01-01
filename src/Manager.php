@@ -36,19 +36,19 @@ class Manager
     /**
      * Saves a Minim-compatible configuration using the configured base configuration and given user configuration.
      *
-     * @param UserConfiguration $user   the user configuration to use
-     * @return String                   the path to the saved Minim-compatible configuration file
+     * @param UserConfiguration $userConfig the user configuration to use
+     * @return String                       the path to the saved Minim-compatible configuration file
      */
-    private function saveMinimConfiguration($user)
+    private function saveMinimConfiguration($userConfig)
     {
-        $id = md5($user->getAdminEmail()); // Hash username.
+        $id = md5($userConfig->getAdminEmail()); // Hash username.
         $sessionFilename = $this->config->getSessionFolderName() . '/' . $id . '.dat'; // Create session file path.
 
         // Save Minim configuration.
-        $userConfigFilename = $this->getMinimConfigurationFilename($user->getAdminEmail());
+        $userConfigFilename = $this->getMinimConfigurationFilename($userConfig->getAdminEmail());
         $minimConfig = array(
-            'admin_email' => $user->getAdminEmail(),
-            'admin_password_hash' => $user->getAdminPasswordHash(),
+            'admin_email' => $userConfig->getAdminEmail(),
+            'admin_password_hash' => $userConfig->getAdminPasswordHash(),
             'secret_key' => $this->config->getSecretKey(),
             'token_length' => $this->config->getTokenLength(),
             'token_ttl' => $this->config->getTokenTtl(),
