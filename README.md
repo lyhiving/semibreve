@@ -89,7 +89,7 @@ Or redirect away from a page based on whether they're logged in or not:
 
 ```php
 // Check if user is authenticated.
-if ($semibreve->getAuthenticatedUser() !== null) {
+if ($semibreve->getAuthenticatedUser() === null) {
     header('Location: /forbidden.php'); // Not logged in, go to jail.
     die();
 }
