@@ -37,7 +37,7 @@ cookie_name: semibreve_auth # The name of the authentication cookie.
 config_folder_name: /var/www/semibreve/configs # The path to the Minim configs directory.
 user_folder_name: /var/www/semibreve/users # The path to the user configs directory.
 session_folder_name: /var/www/semibreve/sessions # The path to the sessions directory.
-cookie_ssl_only: false # Whether or not cookies are enables for HTTPS only. If enabled, non-HTTPS requests will fail.
+cookie_ssl_only: false # Whether or not cookies are enabled for HTTPS only. If enabled, non-HTTPS requests will fail.
 cookie_http_only: true # Whether to restrict cookies to HTTP only and disallow access by client-side script.
 ```
 
