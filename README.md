@@ -1,6 +1,8 @@
 # Semibreve
 Very simple multi-user authentication.
 
+![Logo](docs/svg/logo.svg)
+
 Every so often, you build a website that needs:
   * to run without a database
   * to have an administrator backend
